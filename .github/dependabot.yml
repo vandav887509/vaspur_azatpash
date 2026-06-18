@@ -1,0 +1,24 @@
+version: 2
+updates:
+  # Keeps the SHA-pinned actions in .github/workflows up to date.
+  # Dependabot understands SHA pins and opens PRs that bump the SHA while
+  # showing the corresponding version tag in a comment, so you get the
+  # security benefit of pinning without manually tracking releases.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  # Tracks new Wazuh image releases referenced in the Docker Compose stack.
+  - package-ecosystem: "docker"
+    directory: "/wazuh/single-node"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "deps(wazuh)"
